@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI StudyBuddy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header><h1>📚 AI StudyBuddy</h1><p>Turn your notes into summaries, flashcards, quizzes and study plans.</p></header>
+
+  <main>
+    <aside>
+      <h2>Add material</h2>
+      <input id="title" placeholder="Title (e.g. Photosynthesis)" />
+      <textarea id="content" rows="8" placeholder="Paste your study notes here..."></textarea>
+      <button id="saveBtn" class="primary">Save material</button>
+
+      <h2>My materials</h2>
+      <ul id="list"></ul>
+    </aside>
+
+    <section id="workspace" class="hidden">
+      <div class="row between">
+        <h2 id="mTitle"></h2>
+        <button id="delBtn" class="danger">Delete</button>
+      </div>
+      <details><summary>View notes</summary><pre id="mContent"></pre></details>
+
+      <div class="options">
+        <label>Level
+          <select id="level"><option>beginner</option><option>intermediate</option><option>advanced</option></select>
+        </label>
+        <label>Items <input id="count" type="number" min="1" max="30" value="8" /></label>
+        <label>Difficulty
+          <select id="difficulty"><option>easy</option><option selected>medium</option><option>hard</option></select>
+        </label>
+        <label>Days <input id="days" type="number" min="1" max="30" value="5" /></label>
+      </div>
+
+      <div class="row">
+        <button data-type="summary">Summary</button>
+        <button data-type="flashcards">Flashcards</button>
+        <button data-type="quiz">Quiz</button>
+        <button data-type="study-plan">Study plan</button>
+      </div>
+
+      <div id="status"></div>
+      <div id="history"></div>
+      <div id="result"></div>
+    </section>
+
+    <section id="empty"><p>Save or select a material to get started.</p></section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

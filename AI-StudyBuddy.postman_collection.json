@@ -1,0 +1,62 @@
+{
+  "info": {
+    "name": "AI StudyBuddy",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000" },
+    { "key": "materialId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Create material",
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.collectionVariables.set('materialId', pm.response.json()._id);"] } }],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"title\": \"Photosynthesis\",\n  \"content\": \"Photosynthesis is the process by which plants convert light energy into chemical energy. It occurs in chloroplasts, where chlorophyll absorbs sunlight. The light-dependent reactions produce ATP and NADPH and release oxygen from water. The Calvin cycle then uses ATP and NADPH to fix carbon dioxide into glucose.\"\n}" },
+        "url": "{{baseUrl}}/api/materials"
+      }
+    },
+    { "name": "List materials", "request": { "method": "GET", "url": "{{baseUrl}}/api/materials" } },
+    { "name": "Get material", "request": { "method": "GET", "url": "{{baseUrl}}/api/materials/{{materialId}}" } },
+    {
+      "name": "Generate summary",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{ \"level\": \"beginner\" }" },
+        "url": "{{baseUrl}}/api/materials/{{materialId}}/summary"
+      }
+    },
+    {
+      "name": "Generate flashcards",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{ \"level\": \"beginner\", \"count\": 8 }" },
+        "url": "{{baseUrl}}/api/materials/{{materialId}}/flashcards"
+      }
+    },
+    {
+      "name": "Generate quiz",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{ \"level\": \"intermediate\", \"count\": 5, \"difficulty\": \"medium\" }" },
+        "url": "{{baseUrl}}/api/materials/{{materialId}}/quiz"
+      }
+    },
+    {
+      "name": "Generate study plan",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{ \"level\": \"beginner\", \"days\": 5, \"minutesPerDay\": 30 }" },
+        "url": "{{baseUrl}}/api/materials/{{materialId}}/study-plan"
+      }
+    },
+    { "name": "List saved resources", "request": { "method": "GET", "url": "{{baseUrl}}/api/materials/{{materialId}}/resources?type=quiz" } },
+    { "name": "Delete material", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/materials/{{materialId}}" } }
+  ]
+}
